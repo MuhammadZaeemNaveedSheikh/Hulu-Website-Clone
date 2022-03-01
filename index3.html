@@ -1,0 +1,581 @@
+<!-- Based on Hulu Webpage Clone | HTML & CSS by Brad Traversy (2021)
+see: https://www.youtube.com/watch?v=9OVLaEjY-Rc -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Stream TV and Movies Live and Online | Hulu</title>
+    <style>
+        .popup {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* The actual popup */
+.popup .popuptext {
+  visibility: hidden;
+  width: 260px;
+ 
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 8px 0;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  left: 50%;
+  margin-left: -80px;
+}
+
+/* Popup arrow */
+.popup .popuptext::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #555 transparent transparent transparent;
+}
+
+/* Toggle this class - hide and show the popup */
+.popup .show {
+  visibility: visible;
+  -webkit-animation: fadeIn 1s;
+  animation: fadeIn 1s;
+}
+
+/* Add animation (fade in the popup) */
+@-webkit-keyframes fadeIn {
+  from {opacity: 0;} 
+  to {opacity: 1;}
+}
+
+@keyframes fadeIn {
+  from {opacity: 0;}
+  to {opacity:1 ;}
+}
+        .tc-reset-css {
+          border: none;
+          background: none;
+        }
+        
+        .tc-privacy-wrapper .tc-privacy-banner {
+          width: 100%;
+          left: 0;
+          text-align: left;
+          opacity: 0.9;
+          font-size: 1rem;
+        }
+        
+        .tc-privacy-wrapper .tc-privacy-footer {
+          bottom: 0;
+        }
+        
+        .tc-privacy-wrapper .tc-privacy-header {
+          top: 0;
+        }
+        
+        .tc-privacy-wrapper .tc-privacy-block-text {
+          display: block;
+        }
+        
+        .tc-privacy-wrapper .tc-privacy-text {
+          padding: 10px;
+          font-size: 0.75em;
+          text-align: left;
+        }
+        
+        .tc-privacy-wrapper .tc-privacy-block-button,
+        .tc-privacy-wrapper .tc-privacy-block-text {
+          vertical-align: middle;
+        }
+        
+        .tc-privacy-wrapper .tc-privacy-block-button {
+          width: 100%;
+          display: block;
+        }
+        
+        .tc-privacy-wrapper .tc-privacy-button {
+          float: left;
+          margin: 10px 0px 10px 10px;
+          display: block;
+          cursor: pointer;
+          font-size: 0.75rem;
+          padding: 5px 10px;
+        }
+        
+        @media (max-width: 767px) {
+          .tc-privacy-wrapper .tc-privacy-button {
+            margin: 10px 0;
+          }
+        }
+        .tc-privacy-wrapper .tc-privacy-block-button > button:focus {
+          /*outline: black 2px dotted;
+          box-shadow: 0 0 0 1px white;
+          -webkit-box-shadow: 0 0 0 1px white;
+          -moz-box-shadow: 0 0 0 1px white;*/
+        }
+        
+        /*
+        @media (min-width: 768px) and (max-width: 979px) {
+          .tc-privacy-wrapper .tc-privacy-block-text {
+            width: 69%;
+          }
+          .tc-privacy-wrapper .tc-privacy-block-button {
+            width: 29%;
+          }
+        }*/
+        /*
+        @media (max-width: 767px) {
+          .tc-privacy-wrapper .tc-privacy-block-text {
+            width: 100%;
+          }
+          .tc-privacy-wrapper .tc-privacy-block-button {
+            width: 100%;
+          }
+          .tc-privacy-wrapper .tc-privacy-button {
+            margin: 0 0 0 0;
+            float: none;
+            width: 100%;
+          }
+          .tc-privacy-wrapper .tc-privacy-button.tc-privacy-button-top {
+            top: 0;
+            right: 0;
+            width: auto;
+            position: absolute;
+            margin: 10px;
+          }
+          .tc-privacy-padding-top {
+            padding-top: 1rem;
+          }
+        }*/
+        .tc-privacy-wrapper .tc-privacy-banner {
+          background: #fffff;
+          position: fixed;
+          z-index: 999998;
+        }
+        
+        .tc-privacy-wrapper .tc-privacy-text {
+          color: #717885;
+        }
+        
+        #footer_tc_privacy_button {
+          background: #fff;
+          color: #55637f;
+        }
+        
+        #footer_tc_privacy_button_2 {
+          background: #55637f;
+          color: #ffffff;
+        }
+        
+        #footer_tc_privacy_button_3 {
+          background: #2370be;
+          color: #ffffff;
+        }
+        
+        .tc-privacy-wrapper .tc-privacy-banner {
+          font-size: 1rem;
+          max-width: 640px;
+          text-align: center;
+          margin: 0 auto;
+        }
+        
+        #footer_tc_privacy_title {
+          margin-bottom: 0;
+          width: 100%;
+          color: #4a4a4a;
+          font-size: 1rem;
+          font-weight: 600;
+          margin-bottom: 10px;
+          display: block;
+          text-align: center;
+        }
+        
+        p .footer_tc_privacy_content {
+          display: block;
+          margin-bottom: 10px;
+          text-align: center;
+          line-height: 1.5;
+        }
+        
+        .footer_tc_privacy_content_italic {
+          font-style: italic;
+        }
+        
+        .tc-open-privacy-center {
+          color: #2baacd;
+          display: inline-block !important;
+        }
+        
+        #footer_tc_privacy {
+          padding: 20px 40px;
+          opacity: 1 !important;
+          color: #717885;
+          background: 0 0 !important;
+          display: block;
+          width: auto !important;
+        }
+        
+        #footer_tc_privacy:after {
+          content: " ";
+          display: block;
+          position: absolute;
+          z-index: 0;
+          bottom: 20px;
+          top: 0;
+          right: 20px;
+          left: 20px;
+          box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.4);
+          border-radius: 6px;
+          background-color: #fff;
+        }
+        
+        #footer_tc_privacy {
+          display: block;
+        }
+        
+        #footer_tc_privacy_container_button,
+        #footer_tc_privacy_container_text {
+          position: relative;
+          z-index: 1;
+          display: block !important;
+          padding: 20px !important;
+          background: 0 0 !important;
+          vertical-align: middle;
+        }
+        
+        #footer_tc_privacy_container_text {
+          border-radius: 5px 0 0 5px;
+          max-width: 100% !important;
+          padding: 20px;
+          text-align: center;
+        }
+        
+        #footer_tc_privacy_container_button {
+          text-transform: uppercase;
+          border-radius: 0 5px 5px 0;
+          width: auto !important;
+          padding-top: 10px !important;
+          padding-bottom: 40px !important;
+          text-align: center;
+          display: block !important;
+        }
+        
+        /*@media screen and (min-width: 921px) {
+          #footer_tc_privacy_container_button {
+            padding-right: 45px !important;
+            width: 40% !important;
+          }
+        }*/
+        #footer_tc_privacy_text {
+          padding: 0 !important;
+        }
+        
+        /*
+        @media screen and (max-width: 425px) {
+          #footer_tc_privacy_text,
+          #footer_tc_privacy_title {
+            text-align: center !important;
+          }
+        }*/
+        #footer_tc_privacy_button {
+          float: none !important;
+          margin: 0 !important;
+          border-radius: 100px;
+          border: 1px solid #55637f;
+          font-size: 0.6875rem !important;
+          padding: 9px 25px !important;
+          text-transform: uppercase;
+          display: inline-block !important;
+        }
+        
+        #footer_tc_privacy_button_2 {
+          float: none !important;
+          margin: 0 !important;
+          border-radius: 100px;
+          font-size: 0.6875rem !important;
+          padding: 9px 25px !important;
+          text-transform: uppercase;
+          display: inline-block !important;
+          margin-left: 15px !important;
+        }
+        
+        @media (max-width: 480px) {
+          #footer_tc_privacy_button {
+            margin-bottom: 20px !important;
+          }
+        
+          #footer_tc_privacy_button_2 {
+            margin-left: 0 !important;
+          }
+        }
+        </style>
+   
+  
+  </head>
+  <body>
+    <header class="header">
+      <nav>
+        <ul>
+          <li>
+            <button class="login-btn">Log In</button>
+          </li>
+        </ul>
+      </nav>
+      <div class="header-content">
+        <h4>Try up to one month free</h4>
+        <img
+          src="https://github.com/bradtraversy/hulu-webpage-clone/blob/main/img/logo.png?raw=true"
+          alt="Hulu"
+          class="logo"
+        />
+        <div class="header-text-1">Watch thousands of TV shows and movies.</div>
+        <div class="header-text-2">
+          HBO Max™, SHOWTIME®, CINEMAX® and STARZ® available as add-ons.
+        </div>
+        <button class="btn btn-cta">Start Your Free Trial</button>
+        <div class="legal-text">
+          Free trial for new & eligible returning subscribers only.
+        </div>
+      </div>
+    </header>
+    <section class="sub-header">
+      <img
+        src="https://github.com/bradtraversy/hulu-webpage-clone/blob/main/img/logos.png?raw=true"
+        alt=""
+      />
+      <div>
+        <h4>Bundle with any Hulu plan & save</h4>
+        <h3>Get Hulu, Disney+, and ESPN+.</h3>
+        <a href="#" class="sub-link">Details</a>
+      </div>
+      <div>
+        <a href="#" class="btn btn-outline">Get Bundle</a>
+        <a href="#" class="sub-link">Terms apply</a>
+      </div>
+    </section>
+    <section class="categories">
+      <h4>Included in all plans</h4>
+      <div class="text-xl">All the TV You Love</div>
+      <div class="sub-text">
+        Stream full seasons of exclusive series, current-season episodes, hit
+        movies, Hulu Originals, kids shows, and more.
+      </div>
+      <div class="covers">
+        <div class="cover-1">
+          <div class="cover-grad"></div>
+          <div class="cover-text">
+            <div class="sub-title">Past & Current Seasons</div>
+            <h3>TV Shows</h3>
+          </div>
+        </div>
+        <div class="cover-2">
+          <div class="cover-grad"></div>
+          <div class="cover-text">
+            <div class="sub-title">New & Classics</div>
+            <h3>Movies</h3>
+          </div>
+        </div>
+        <div class="cover-3">
+          <div class="cover-grad"></div>
+          <div class="cover-text">
+            <div class="sub-title">Groundbreaking</div>
+            <h3>Hulu Originals</h3>
+          </div>
+        </div>
+        <div class="cover-4">
+          <div class="cover-grad"></div>
+          <div class="cover-text">
+            <div class="sub-title">Add-On</div>
+            <h3>Premiums</h3>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="live">
+      <div class="live-border">
+        <h4>Hulu + Live TV</h4>
+        <div class="text-xl">Live TV Makes It Better</div>
+        <div class="sub-text">
+          Make the switch from cable. Get 75+ top channels with your favorite
+          live sports, news, and events - plus the entire Hulu streaming
+          library.
+        </div>
+        <div class="legal-text">
+          Live TV plan required. Regional restrictions, blackouts and additional
+          terms apply. See details
+        </div>
+        <a href="#">View Channels in Your Area</a>
+      </div>
+    </section>
+    <section class="live-sports">
+      <div class="live-sports-content">
+        <div class="text-xl">Live Sports</div>
+        <div class="sub-text">
+          Catch your games at home or on the go. Stream live games from major
+          college and pro leagues including the NCAA®, NBA, NHL, NFL, and more.
+        </div>
+
+        <div class="live-sports-logos">
+          <div>
+            <img
+              src="https://github.com/bradtraversy/hulu-webpage-clone/blob/main/img/live-sports-logo-1.png?raw=true"
+              alt=""
+            />
+          </div>
+          <div>
+            <img
+              src="https://github.com/bradtraversy/hulu-webpage-clone/blob/main/img/live-sports-logo-2.png?raw=true"
+              alt=""
+            />
+          </div>
+          <div>
+            <img
+              src="https://github.com/bradtraversy/hulu-webpage-clone/blob/main/img/live-sports-logo-3.svg?raw=true"
+              alt=""
+            />
+          </div>
+          <div>
+            <img
+              src="https://github.com/bradtraversy/hulu-webpage-clone/blob/main/img/live-sports-logo-4.png?raw=true"
+              alt=""
+            />
+          </div>
+        </div>
+
+        <div class="legal-text">
+          Live TV plan required. Regional restrictions, blackouts and additional
+          terms apply. See details
+        </div>
+      </div>
+    </section>
+    <footer class="footer">
+      <div class="footer-container">
+        <div class="footer-lists">
+          <ul>
+            <li class="list-head">BROWSE</li>
+            <li><a href="#">Streaming Library</a></li>
+            <li><a href="#">Live TV</a></li>
+            <li><a href="#">Live News</a></li>
+            <li><a href="#">Live Sports</a></li>
+          </ul>
+          <ul>
+            <li><a href="#">TV Shows</a></li>
+            <li><a href="#">Movies</a></li>
+            <li><a href="#">Originals</a></li>
+            <li><a href="#">Networks</a></li>
+            <li><a href="#">Kids</a></li>
+            <li><a href="#">FX on Hulu</a></li>
+          </ul>
+          <ul>
+            <li><a href="#">Hulu, Disney+, and ESPN+</a></li>
+            <li><a href="#">Disney Bundle</a></li>
+            <li><a href="#">HBO Max</a></li>
+            <li><a href="#">Cinimax</a></li>
+            <li><a href="#">Showtime</a></li>
+            <li><a href="#">STARZ</a></li>
+          </ul>
+          <ul>
+            <li class="list-head">HELP</li>
+            <li><a href="#">Account & Billing</a></li>
+            <li><a href="#">Plans & Pricing</a></li>
+            <li><a href="#">Supported Devices</a></li>
+            <li><a href="#">Accesibility</a></li>
+          </ul>
+          <ul>
+            <li class="list-head">ABOUT US</li>
+            <li><a href="#">Press</a></li>
+            <li><a href="#">Jobs</a></li>
+            <li><a href="#">Contact</a></li>
+          </ul>
+        </div>
+        <div class="divider"></div>
+        <div class="social-icons">
+          <a href="#"
+            ><img
+              src="https://github.com/bradtraversy/hulu-webpage-clone/blob/main/img/facebook.svg?raw=true"
+              alt=""
+          /></a>
+          <a href="#"
+            ><img
+              src="https://github.com/bradtraversy/hulu-webpage-clone/blob/main/img/twitter.svg?raw=true"
+              alt=""
+          /></a>
+          <a href="#"
+            ><img
+              src="https://github.com/bradtraversy/hulu-webpage-clone/blob/main/img/youtube.svg?raw=true"
+              alt=""
+          /></a>
+          <a href="#"
+            ><img
+              src="https://github.com/bradtraversy/hulu-webpage-clone/blob/main/img/instagram.svg?raw=true"
+              alt=""
+          /></a>
+        </div>
+      </div>
+    </footer>
+    <div class="modal" style="background-color: #EADDCA;width:100%;" >
+      <div class="modal-box" style="background-color: #EADDCA;width:100%;" >
+        <div class="modal-body"style="background-color: #EADDCA; width:100%;" >
+            <body translate="no" >
+                <div id="tc-privacy-wrapper" class="tc-privacy-wrapper tc-privacy-override">
+                <div id="footer_tc_privacy" class="tc-reset-css tc-privacy-banner tc-privacy-footer" aria-label="Paramètres de confidentialité" aria-describedby="description" role="dialog" aria-modal="true">
+                  <div id="footer_tc_privacy_container_text" class="tc-reset-css tc-privacy-block-text">
+                    <div id="footer_tc_privacy_text" class="tc-reset-css tc-privacy-text">
+                      <img style="display: block; margin: 0 auto; max-width: 240px;" height:auto="" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSNLr14M_FjJzu3mGgJbp60PDgBySF8Ze0q5g&usqp=CAU">
+                      <h2 id="footer_tc_privacy_title">Your data, controlled by you!!!</h2>
+                      <p><span class="footer_tc_privacy_content">We collect information when you browse our website or use our service. Among the information collected are your social Security number, date of birth, card transactions and credit background. </span></p>
+                      <p><span class="footer_tc_privacy_content">Information collected does not identify you and is used by us to analyze trends, to administer and monitor our site, its use, and to gather general information about the use of our website. The more information we have, the more accurate and personalized services we can offer.  </span></p>
+                      <p><span class="footer_tc_privacy_content footer_tc_privacy_content_italic">To ensure your control over the information we gather, you can use our control tool to make changes to your data collection consent anytime. <a class="footer_tc_privacy_content tc-open-privacy-center" href="#" target="_self"><div class="popup" onclick="myFunction()">Click me to toggle the popup!
+                        <span class="popuptext" id="myPopup">A Simple Popup!<ul>
+                            <li><input  type="checkbox"/>Lsit item 1</li>
+                            <li><input  type="checkbox"/>Lsit item 1</li>
+                            <li><input  type="checkbox"/>Lsit item 1</li>
+                            <li><input  type="checkbox"/>Lsit item 1</li>
+                            <li><input  type="checkbox"/>Lsit item 1</li>
+                            <li><input  type="checkbox"/>Lsit item 1</li>
+                          </ul></span>
+                      </div>
+                      </a>. <br>We encourge you to opt-into this data collection and utilize our control tool according to your privacy preferences. This tool is easy to use and can also be found in the privacy settings menu on the website  <a class="footer_tc_privacy_content tc-open-privacy-center" href="#">«»</a>. </span></p>
+                    </div>
+                  </div>
+                  <div id="footer_tc_privacy_container_button" class="tc-reset-css tc-privacy-block-button">
+                    <button id="footer_tc_privacy_button" class="tc-reset-css tc-privacy-button" type="button" aria-label="Je refuse l’utilisation des cookies"><a href="./Bank-website-master/index.html">Opt-In</a></button>
+                    <button id="footer_tc_privacy_button_2" class="tc-reset-css tc-privacy-button" type="button" aria-label="J’ai compris et j’accepte l’utilisation des cookies">Opt-Out</button>
+                    </div>
+                </div>
+              </div>
+        </div>
+        <!-- <div class="modal-footer">
+          <p>Don't have an account? <a href="#">Start your free trial</a></p>
+        </div> -->
+        <img
+          class="close"
+          src="https://github.com/bradtraversy/hulu-webpage-clone/blob/main/img/close.svg?raw=true"
+          alt="close"
+        />
+      </div>
+    </div>
+    
+<script>
+  // When the user clicks on div, open the popup
+  function myFunction() {
+    var popup = document.getElementById("myPopup");
+    popup.classList.toggle("show");
+  }
+  </script>
+    <script src="script.js"></script>
+  </body>
+</html>
